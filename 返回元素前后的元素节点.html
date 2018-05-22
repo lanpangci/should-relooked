@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <strong></strong>
+        <p></p>
+        <a href="#"></a>
+        <span></span>
+    </div>
+    <script type="text/javascript">
+        function ret(node, n) {
+            while(node && n){
+                // if(n > 0){      兼容性不好
+                //     node = node.nextElementSibling;
+                //     n--;
+                // }else{
+                //     node = node.previousElementSibling;
+                //     n++;
+                // }
+
+                if(n > 0){
+                    while(1){
+                         if(!node || node.nextSibling.nodeType == 1){
+                                node = node.nextSibling;
+                                n--;
+                                break;
+                            }else{
+                                node = node.nextSibling;
+                            }
+                    }  
+                }else{
+                    while(1){
+                         if(!node || node.nextSibling.nodeType == 1){
+                                node = node.nextSibling;
+                                n++;
+                                break;
+                            }else{
+                                node = node.nextSibling;
+                            }
+                    } 
+                }
+            }
+            return node;
+        }
+
+        var p = document.getElementsByTagName('p')[0];
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <li></li>
+        <ul></ul>
+        <a href="#"></a>
+        <strong></strong>
+        <span></span>
+        <p></p>
+    </div>
+    <script type="text/javascript">
+        // function niXu(target) {
+        //     var temp = target.children;
+        //     var len = temp.length;
+        //     var te = [];
+        //     for(var i = len-1; i >= 0; i--){
+        //         te.push(temp[i]);
+        //         temp[i].remove();
+        //     }
+        //     for(i = 0; i < len; i++){
+        //         target.appendChild(te[i]);
+        //     }
+        //     return target;
+        // }
+        
+        function niXu(target){
+            var temp = target.children;
+            var len = temp.length;
+            var te;
+            for(var i = 1; i < len; i++){
+                te = target.removeChild(temp[len-1-i]);
+                target.appendChild(te);
+            }
+            return target;
+        }
+        var div = document.getElementsByTagName('div')[0];
+    </script>
+</body>
+</html>

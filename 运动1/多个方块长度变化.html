@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        div {
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            background: #5699aa;
+        }
+    </style>
+    <script type="text/javascript" src="..\practice\有用的\tools.js"></script>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script type="text/javascript">
+        var timer = null;
+        //取元素
+        var oDiv = document.getElementsByTagName('div');
+        for(var i = 0; i < 4; i++) {
+            oDiv[i].onmouseenter = function () {
+                move(this, 400);
+            }
+            oDiv[i].onmouseleave = function () {
+                move(this, 100);
+            }
+        }
+        //运动
+        function move(dom, position) {
+            //为了防止清除事件互相干扰，让timer变成oDiv的变量
+            clearInterval(dom.timer);
+            var iSpeed;
+            dom.timer = setInterval(function () {
+                iSpeed = (position - dom.offsetWidth) / 7;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                console.log(iSpeed);
+                if (dom.offsetWidth - position == 0) {
+                    clearInterval(dom.timer);
+                } else {
+                    dom.style.width = dom.offsetWidth + iSpeed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>

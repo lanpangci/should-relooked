@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        input {
+            border: 1px solid rgba(0,0,0,0.8);
+            font-size: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    minute:<input type="text" value="0">
+    sencond:<input type="text" value="0">
+    
+    <script type="text/javascript">
+        var input0 = document.getElementsByTagName('input')[0],
+            input1 = document.getElementsByTagName('input')[1];
+        var value0 = 0,
+            value1 = 0;
+        var timer = setInterval(function () {
+            value0++;
+            console.log('a');
+            if(value0 == 60){
+                value1++;
+                value0 = 0;
+                if(value1 == 3){
+                    clearInterval(timer);
+                }
+
+            }
+            input0.value = value1;
+            input1.value = value0;
+        }, 1000);
+    </script>
+</body>
+</html>

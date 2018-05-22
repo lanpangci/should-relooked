@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            background: #030093;
+            position: absolute;
+            left: 600px;
+            top: 0;
+        }
+
+        span {
+            width: 1px;
+            height: 100px;
+            background: #333;
+            position: absolute;
+            left: 300px;
+        }
+
+        button {
+            color: #fff;
+            background: #999;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <span></span>
+    <button id="Btn">加速</button>
+    <script type="text/javascript">
+        var timer = null;
+        var oDiv = document.getElementsByTagName('div')[0];
+        Btn.onclick = function () {
+            move(oDiv);
+        }
+        function move(dom) {
+            clearInterval(timer);
+            var isSpeed;
+            
+            // if(oDiv.offsetLeft > 300) {
+            //     isSpeed = -8;
+            // }else {
+            //     isSpeed = 8;
+            // }
+            //单个
+            timer = setInterval(function () {
+                // if (Math.abs(300 - oDiv.offsetLeft) < Math.abs(isSpeed)) {
+                //     isSpeed = 300 - oDiv.offsetLeft;
+                // } else if (oDiv.offsetLeft == 300) {
+                //     clearInterval(timer);
+                // }
+                isSpeed = (300 - oDiv.offsetLeft) / 7;
+                isSpeed = isSpeed > 0 ? Math.ceil(isSpeed) : Math.floor(isSpeed);
+                if(oDiv.offsetLeft == 300) {
+                    clearInterval(timer);
+                }else {
+                    oDiv.style.left = oDiv.offsetLeft + isSpeed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>

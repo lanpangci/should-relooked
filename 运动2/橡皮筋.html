@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style type="text/css">
+        .box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+<body>
+    <div class="box"></div>
+</body>
+    <script>
+        var oDiv = document.getElementsByTagName('div')[0];
+
+        oDiv.onclick = function () {
+            startMove(this);
+        }
+        
+        function startMove(obj) {
+            clearInterval(obj.timer);
+            var iSpeed = 50;
+            var a;
+            var f = 0.9;
+            obj.timer = setInterval(function() {
+                //加速度随着距离变化而变化
+                a = (300 - obj.offsetLeft) / 7;
+                iSpeed = (iSpeed + a) * f;
+                //停止的条件
+                if(Math.abs(iSpeed) < 1 && a * 7 < 1) { 
+                    clearInterval(obj.timer);
+                }else {
+                    obj.style.left = obj.offsetLeft + iSpeed + 'px';
+                    console.log(iSpeed);
+                }
+            }, 30);
+        }
+    </script>
+</html>

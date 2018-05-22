@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <strong>
+            <span>
+                <i></i>
+            </span>
+        </strong>
+    </div>
+    <script type="text/javascript">
+        function retParent(elem, n) {
+            
+            var temp = [elem];
+            
+            for(var i = 1; i <= n; i++){
+                for(var j = 0; j < temp[i-1].length; j++){
+                    if(temp[i-1][j].hasChildNodes()){
+                        temp[i] = temp[i-1][j].Children;
+                        break;
+                    }
+                }
+                if(j > temp[i-1].length){
+                    return console.log('该元素没有这么多层级。');
+                }
+                
+            }
+            return temp[i-1][j-1];
+        }
+
+        var div = document.getElementsByTagName('div');
+    </script>
+</body>
+</html>

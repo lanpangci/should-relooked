@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    .box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div class="box"></div>
+
+</body>
+<script>
+    var oDiv = document.getElementsByClassName('box')[0];
+    // oDiv.onclick = function () {
+    //     startMove(this);
+    // }
+
+    oDiv.onmousedown = function(e) {
+        clearInterval(oDiv.timer);
+        var event = e || window.event;
+        //鼠标离目标边缘距离
+        var disX = event.clientX - this.offsetLeft;
+        var disY = event.clientY - this.offsetTop;
+        var lastLeft = this.offsetLeft;
+        var lastTop = this.offsetTop;
+        var iSpeedX;
+        var iSpeedY;
+        var that = this;
+        document.onmousemove = function(e) {
+            var event = e || window.event;
+            var newLeft = event.clientX - disX;
+            var newTop = event.clientY - disY;
+            iSpeedX = newLeft - lastLeft;
+            iSpeedY = newTop - lastTop;
+            lastLeft = newLeft;
+            lastTop = newTop;
+            that.style.left = newLeft + 'px';  
+            that.style.top = newTop + 'px';  
+        }
+        // ?
+        // this.onmouseup = function () {
+        //     document.onmousemove = null;
+        //     this.onmousedown = null;
+        //     console.log(2);
+        // }
+        oDiv.onmouseup = function () {
+            document.onmousemove = null;
+            // oDiv.onmouseup = null;
+            startMove(this, iSpeedX, iSpeedY);
+        }
+    }
+    function startMove(obj, iSpeedX, iSpeedY) {
+        clearInterval(obj.timer);
+        var g = 9.8;
+        var newLeft;
+        var newTop;
+        obj.timer = setInterval(function () {
+            iSpeedY += g;
+            newLeft = obj.offsetLeft + iSpeedX;
+            newTop = obj.offsetTop + iSpeedY;
+            // console.log(iSpeedY); //为什么最终iSpeedY的值不变
+            if (newTop > window.innerHeight - obj.offsetHeight) {  //使用newTop，可以判断前一次碰撞
+                newTop = window.innerHeight - obj.offsetHeight;
+                iSpeedY *= -1;
+                iSpeedX *= 0.9;
+                iSpeedY *= 0.9;
+            } else if (newTop < 0) {
+                newTop = 0;
+                iSpeedY *= -1;
+                iSpeedX *= 0.9;
+                iSpeedY *= 0.9;
+            }
+
+            if (newLeft > window.innerWidth - obj.offsetWidth) {
+                newLeft = window.innerWidth - obj.offsetWidth;
+                iSpeedX *= -1;
+                iSpeedX *= 0.9;
+                iSpeedY *= 0.9;
+            } else if (newLeft < 0) {
+                newLeft = 0;
+                iSpeedX *= -1;
+                iSpeedX *= 0.9;
+                iSpeedY *= 0.9;
+            }
+
+            obj.style.left = newLeft + 'px';
+            obj.style.top = newTop + 'px';
+        }, 30);
+    }
+</script>
+
+</html>

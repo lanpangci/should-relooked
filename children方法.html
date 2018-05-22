@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- <div>
+        <span></span>
+        <strong></strong>
+        <a href="#"></a>
+    </div> -->
+
+    <script type="text/javascript">
+        function retElementChild(node) {
+
+            var temp = {
+                leng : 0,
+                push : Array.prototype.push,
+                splice : Array.prototype.splice,
+            }
+            var    child = node.childNodes;
+            var    len = child.length;
+                
+            for(var i = 0; i <len; i++){
+                if(child[i].nodeType === 1){
+                    temp.push(child[i]);
+                }
+            }
+            return temp;
+        }
+<!-- 
+        var node = document.getElementsByTagName('div')[0]; //需要给[]，不然传的是数组
+        var div1 = retElementChild(node); -->
+    </script>
+</body>
+</html>

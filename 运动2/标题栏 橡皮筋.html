@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;;
+        }
+
+        ul {
+            position: relative;
+            width: 600px;
+            height: 70px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+
+        ul > li {
+            width: 148px;
+            height: 70px;
+            border: 1px solid #000;
+            /* box-sizing: border-box; */
+            float: left;
+            text-align: center;
+            line-height: 70px;
+        }
+        
+        .bg {
+            position: absolute;
+            left: 0;
+            background: orange;
+            opacity: 0.5;
+        }
+
+    </style>
+<body>
+    <ul>
+        <li class="nav">galgame</li>
+        <li class="nav">hacker</li>
+        <li class="nav">anime</li>
+        <li class="nav">MAD</li>
+        <li class="bg"></li>
+    </ul>
+</body>
+    <script>
+        var oLiArr = Array.prototype.slice.call(document.getElementsByClassName('nav'), 0);
+        var tLi = document.getElementsByClassName('bg')[0];
+        oLiArr.forEach(function (ele, index) {
+            ele.onmouseenter = function () {
+                var oLeft = this.offsetLeft;
+                startMove(tLi, oLeft);
+            }    
+        });
+        
+        function startMove(obj, target) {
+            clearInterval(obj.timer);
+            var iSpeed = 50;
+            var iCur;
+            var a;
+            var f = 0.8;
+            obj.timer = setInterval(function () {
+                iCur = obj.offsetLeft;
+                a = (target - iCur) / 7;
+                iSpeed = (iSpeed + a) * f;
+                if(Math.abs(iSpeed) < 1 && Math.abs(7 * a) < 1) {
+                    clearInterval(obj.timer);
+                    obj.style.left = target + 'px'; //直接跳到目标点
+                }else {
+                    obj.style.left = iCur + iSpeed + 'px';
+                }
+            }, 30)
+        }
+
+    </script>
+</html>

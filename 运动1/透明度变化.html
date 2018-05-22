@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    div {
+        width: 100px;
+        height: 100px;
+        background: #999;
+        opacity: 1;
+    }
+</style>
+<script type="text/javascript" src="../practice/有用的/tools.js"></script>
+
+<body>
+    <div>
+    </div>
+    <script type="text/javascript">
+        var timer = null;
+        var oDiv = document.getElementsByTagName('div')[0];
+        oDiv.onclick = function () {
+            opChange(this, 50);
+        }
+        function opChange(dom, target) {
+            timer = setInterval(function () {
+                var iSpeed;
+                var iCur;
+                iCur = parseFloat(getStyle(dom, 'opacity')) * 100;
+                // console.log(iCur);
+                iSpeed = (target - iCur) / 7;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                // console.log(iSpeed);
+                if (iCur == target) {
+                    clearInterval(timer);
+                } else {
+                    dom.style.opacity = (iCur + iSpeed) / 100;
+                    // console.log(dom.style.opacity);
+                }
+
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>

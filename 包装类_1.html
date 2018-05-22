@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		function Person() {
+			var a = 0;
+			function sss() {  //保留了Person的AO；
+				a ++;
+				document.write(a);
+			}
+			this.say = sss;
+		}
+		var oPerson = new Person();
+		oPerson.say();
+		oPerson.say();
+		var oPerson1 = new Person();
+		oPerson1.say();
+		//返回121
+	</script>
+</body>
+</html>

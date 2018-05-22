@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="tools.js" async="aysnc"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 0px;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+        
+        span {
+            font-size: 14px;;
+        }
+
+        .top {
+            background-color: #303d50;
+            width: 100%;
+            height: 29px;
+            text-align: center;
+            line-height: 29px;
+        }
+        .nav {
+            background-color: #f0f0f0;
+            width: 100%;
+            height: 25px;
+        }
+        
+        ul {
+            line-height: 25px;
+        }
+        li {
+            font-size: 12px;
+            display: inline-block;
+            padding: 0 8px;
+            
+        }
+        .bgcolor_0 {
+            background-color: #aaa;
+        }
+        .bgcolor_1 {
+            background-color: #f0f0f0;
+        }
+        .F_1 {
+            width: 420px;
+            height: 645px;
+            border: 1px solid #aaa;
+            position: relative;
+            top: -2px;
+        }
+
+        .F_1 .F_1_1 {
+            height: 70px;
+            border-bottom: 1px solid #e9e9e9; 
+        }
+        
+        .F_1 .F_1_2{
+            height: 133px;
+            border-bottom: 1px solid #e9e9e9; 
+        }
+        .line {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 2px;
+        }
+
+        .left {
+            display: inline-block;
+            position: absolute;
+            left: 42px;
+
+        }
+        
+        .right {
+            display: inline-block;
+            position: absolute;
+            right: 35px;
+            color: #b5ac98;
+        }
+        
+        .right_1 {
+            width: 612px;
+            height: 334px;
+            background-color: #e9e9e9;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <span>菜单栏.html - Visual Studio Code [管理员]</span>
+    </div>
+    <div class="nav">
+        <ul>
+            <li index="0">文件(F)</li>
+            <li index="1">编辑(E)</li>
+            <li index="2">选择(S)</li>
+            <li index="3">查看(V)</li>
+            <li index="4">转到(G)</li>
+            <li index="5">调试(D)</li>
+            <li index="6">任务(T)</li>
+            <li index="7">帮助(H)</li>
+        </ul>
+    </div>
+    <div class="F_1" style="display: none;">
+        <div class="F_1_1">
+            <div class="line">
+                <span class="left">新建文件(N)</span>
+                <span class="right">Ctrl+N</span>
+            </div>
+            <div class="line">
+                <span class="left">新建窗口(W)</span>
+                <span class="right">Ctrl+Shift+N</span>
+            </div>
+        </div>
+        <div class="F_1_2">
+                <div class="line">
+                    <span class="left">打开文件(O)...</span>
+                    <span class="right">Ctrl+O</span>
+                </div>
+                <div class="line">
+                    <span class="left">打开文件夹(F)...[Ctrl+K Ctrl+O]</span>
+                </div>
+                <div class="line">
+                    <span class="left">打开工作区(K)...</span>
+                </div>
+                <div class="line">
+                    <span class="left">打开最近的文件(R)...</span>
+                </div>
+                <div class="right_1">
+
+                </div>
+            </div>   
+    </div>
+    <script type="text/javascript">
+        var ul = document.getElementsByTagName('ul')[0];
+        var div = document.getElementsByClassName('F_1');
+        var li = ul.children;
+        var len = li.length;
+        for(var i = 0; i < len; i++) {
+            (function(n) {
+                var text;
+                li[n].onmousedown = function () {
+                    li[n].className = 'bgcolor_0';
+                }
+                li[n].onclick = function () {    
+                    text = li[n].getAttribute('index');
+                    div[text].style.display = 'block';
+                }
+                // document.onmousedown = function(e) {
+                //     var event = e || window.event;
+                //     var target = srcElem(event);
+                //     if(target != li[n]) {
+                //         li[n].className = 'bgcolor_1';
+                //         div[text].style.display = 'none';
+                //     }
+                // }
+               
+            }(i))
+        }
+        // ul.onmousedown = function(e) {
+        //     var event = e || window.event;
+        //     var target = srcElem(event);
+        //     target.className = 'bgcolor';
+        //     target.onclick = function () {
+        //         // div[target.index].style.display = 'block';
+        //         var text = target.getAttribute('index');
+        //         div[text].style.display = 'block';
+        //     }
+        // }
+    </script>
+</body>
+</html>

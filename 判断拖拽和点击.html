@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script typr="text/javascript">
+        var firstTime = 0;
+        var lastTime = 0;
+        var key = false;
+        document.onmousedown = function () {
+            firstTime = new Date().getTime();
+        }
+        document.onmouseup = function () {
+            lastTime = new Date().getTime();
+            if(lastTime - firstTime < 300) {
+                key = true;
+            }
+            if(!key) {
+                console.log('拖拽');
+            }
+        }
+        document.onclick = function () {
+            if(key){
+                console.log('点击');
+                key = false;
+            }
+        }
+    </script>
+</body>
+</html>

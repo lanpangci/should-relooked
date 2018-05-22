@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    div {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        opacity: 1;
+    }
+
+    .box1 {
+        left: 10px;
+        top: 50px;
+        background: #371500;
+    }
+
+    .box2 {
+        left: 10px;
+        top: 150px;
+        background: #511015;
+    }
+
+    .box3 {
+        left: 10px;
+        top: 250px;
+        background: #221023;
+    }
+
+    .box4 {
+        left: 500px;
+        top: 100px;
+        background: #220043;
+    }
+
+    .box5 {
+        left: 500px;
+        top: 200px;
+        background: #31a025;
+    }
+</style>
+<script type="text/javascript" src="../practice/有用的/tools.js"></script>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+    <script type="text/javascript">
+        // 取元素
+        var oDiv1 = document.getClassName('box1')[0];
+        var oDiv2 = document.getClassName('box2')[0];
+        var oDiv3 = document.getClassName('box3')[0];
+        var oDiv4 = document.getClassName('box4')[0];
+        var oDiv5 = document.getClassName('box5')[0];
+        // 最终运动对象
+        var finalObj = {
+            width: 300,
+            height: 400,
+            opacity: 30,
+            left: 300,
+            top: 400
+        }
+        // 绑定事件
+        oDiv1.onclick = function () {
+            startMove(this, finalObj, function () { //需要第一个元素运动结束，第二个元素开始运动，传入一个函数
+                startMove(oDiv2, finalObj, function () {
+                    startMove(oDiv3, finalObj, function () {
+                        startMove(oDiv4, finalObj, function () {
+                            startMove(oDiv5, finalObj, function () { });
+                        });
+                    });
+                });
+            });
+        }
+        // 事件
+        function startMove(dom, fin, fun) {
+            clearInterval(dom.timer);
+            var iSpeed;
+            var iCur;
+            dom.timer = setInterval(function () { //加dom是为了防止点击其它元素取消当前时间函数
+                var flag = true; //每次循环都会刷新，判断当前样式是否达到了标准
+                for (var key in fin) {
+                    //获取各样式的当前值
+                    //透明度和其他事件不一样，需要扩大100倍
+                    if (key == 'opacity') {
+                        iCur = parseFloat(getStyle(dom, 'opacity')) * 100;
+                    } else {
+                        iCur = parseFloat(getStyle(dom, key));
+                    }
+                    //判断样式是否达到了要求
+                    if (iCur != fin[key]) {
+                        flag = false;
+                    }
+                    //计算速度
+                    iSpeed = (fin[key] - iCur) / 7;
+                    //速度取整
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                    //改变当前样式
+                    //透明度另外处理
+                    if (key == 'opacity') {
+                        dom.style[key] = (iCur + iSpeed) / 100;
+                    } else {
+                        dom.style[key] = iCur + iSpeed + 'px';
+                    }
+                }
+                //判断时间函数是否可以结束
+                if (flag == true) {
+                    clearInterval(dom.timer);
+                    fun();  //需要等第一个元素运动结束后执行
+                }
+            }, 30);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var obj = {
+            name : 'abc',
+            age : 123,
+            card : ['visa', 'master'],
+            wife : {
+                name : 'bcd',
+                son : {
+                    name : 'bcd',
+
+                }
+            }
+        }
+
+        var obj1 = {
+        }
+
+        function clone (origin, target) {
+            var target = target || {}; //避免用户没有传目标对象
+            var ops = Object.prototype.toString;
+            var oa = "[object Array]";
+            for(var prop in origin){
+                if(origin.hasOwnProperty(prop)){
+                    if(origin[prop] !== "null" && typeof(origin[prop]) == 'object'){ //判断是否为对象和数组
+                    target[prop] = ops.call(origin[prop]) == oa ? [] : {}; //声明数组和对象
+                    clone(origin[prop], target[prop]); //递归
+                    }
+                    else{
+                        target[prop] = origin[prop];
+                    }
+                }
+                
+            }
+            return target; //即使没有return，用户如果传了target，还是可以实现clone，因为实参和形参是映射关系
+        }
+    </script>
+</body>
+</html>
